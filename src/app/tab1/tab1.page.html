@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Início
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,64 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">início</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <ion-row>
+  <ion-col>
+    <div class= "detalhes">
+      <h2>Mês: Junho</h2>
+    </div>
+  </ion-col>
+  <ion-col>
+    
+  </ion-col>  
+</ion-row>
+  <ion-card>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+        <ion-card-title>Saldo atual:</ion-card-title>
+        </ion-col>
+        <ion-col>
+          <ion-card-title style = "float:right;">28/07</ion-card-title>
+        </ion-col>
+      </ion-row>
+      
+    </ion-card-header>
+    
+    <ion-row>
+      <ion-card-content>
+      R$ 1000,00
+      </ion-card-content>
+      <ion-icon name="eye-outline"></ion-icon>
+    </ion-row>
+
+  </ion-card>
+  
+  <ion-row class="ion-justify-content-center">
+    
+    <ion-col >
+    <div class = "twobuttons">
+    <ion-button class = "fluxobutton" expand = "undefined">Nova Entrada</ion-button>
+    </div>
+    </ion-col>
+
+    <ion-col>
+    <div class = "twobuttons">
+      <ion-button style = "--background:'#eb400cc9'" class = "fluxobutton" expand = "undefined">Nova Saída</ion-button>
+    </div>
+    </ion-col>
+    </ion-row>
+    
+
+  <ion-row class="ion-justify-content-center" style ="padding-top: 20%;"  >
+  <div class = "onebutton">
+  <ion-button  expand = "block">Fechar mês</ion-button>
+  </div>
+  </ion-row>
+  
+  
 </ion-content>

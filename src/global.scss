@@ -24,3 +24,46 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+ion-content {
+    
+    --background: #1f221ec9;
+}
+
+ion-toolbar {
+    --color: #122221;
+    --background: #52ee22c9;    
+}
+
+ion-icon {
+    padding-top: 10px;
+    font-size: 200%;
+}
+
+ion-title{
+    text-align: center;
+}
+
+ion-button{
+    padding: 0px;
+    width: 100%;  
+        --color: #122221;
+    --background: #52ee22c9;
+}
+
+.detalhes{
+    padding-left: 10px;
+}
+
+.twobuttons{
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%; 
+}
+
+.onebutton{
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%; 
+ }
