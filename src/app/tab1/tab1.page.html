@@ -8,16 +8,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  
+
+
   <ion-row>
     <ion-col>
-      <div class= "detalhes">
+      <div class="detalhes">
         <h2>Mês: Junho</h2>
       </div>
     </ion-col>
   </ion-row>
-  
+
   <!--Card do Saldo Atual ------------------------------------------------------------------------------------------>
 
   <ion-card>
@@ -27,31 +27,31 @@
         <ion-col>
           <ion-card-title>Saldo atual:</ion-card-title>
         </ion-col>
-        
+
         <ion-col>
-          <ion-card-title style = "float:right;">28/07</ion-card-title>
+          <ion-card-title style="float:right;">28/07</ion-card-title>
         </ion-col>
       </ion-row>
     </ion-card-header>
-    
+
     <ion-row>
-      <ion-card-content>R$ 1000,00</ion-card-content>
+      <ion-card-content>R$ {{saldoExibido}}</ion-card-content>
       <ion-icon name="eye-outline"></ion-icon>
     </ion-row>
 
   </ion-card>
 
-  <!-- Seção de Botões --------------------------------------------------------------------------------------------->
-  
+  <!-- Botão Entrada --------------------------------------------------------------------------------------------->
+
   <ion-row class="ion-justify-content-center">
-    
-    <ion-col >
-      <div class = "twobuttons">
-        <ion-button class = "fluxobutton" expand = "undefined"  id="open-modal-entrada" >Nova Entrada</ion-button>
+
+    <ion-col>
+      <div class="twobuttons">
+        <ion-button class="fluxobutton" expand="undefined" id="open-modal-entrada">Nova Entrada</ion-button>
       </div>
     </ion-col>
 
-  <!-- Modal entrada ----------------------------------------------------------------------------------------------->
+    <!-- Modal entrada ----------------------------------------------------------------------------------------------->
     <ion-modal trigger="open-modal-entrada" (willDismiss)="onWillDismiss($event)">
       <ng-template>
 
@@ -60,7 +60,7 @@
             <ion-buttons slot="start">
               <ion-button (click)="cancel(0)">Cancel</ion-button>
             </ion-buttons>
-            <ion-title>Welcome</ion-title>
+            <ion-title>Entrada</ion-title>
             <ion-buttons slot="end">
               <ion-button (click)="confirmEntrada(0)" [strong]="true">Confirm</ion-button>
             </ion-buttons>
@@ -71,80 +71,81 @@
         <ion-content class="ion-padding">
           <ion-item>
             <ion-label position="stacked">Data</ion-label>
-            <ion-input type="date" placeholder="Your name" [(ngModel)]="entrada.data"></ion-input>
+            <ion-input type="date" [(ngModel)]="entrada.data"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Valor</ion-label>
-            <ion-input type="number" placeholder="Your name" [(ngModel)]="entrada.valor"></ion-input>
+            <ion-input type="number" placeholder="Valor" [(ngModel)]="entrada.valor"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Detalhes</ion-label>
-            <ion-input type="text" placeholder="Your name" [(ngModel)]="entrada.detalhes"></ion-input>
+            <ion-input type="text" placeholder="Detalhes" [(ngModel)]="entrada.detalhes"></ion-input>
           </ion-item>
 
         </ion-content>
       </ng-template>
     </ion-modal>
 
+    <!-- Botão Saída ----------------------------------------------------------------------------------------------->
     <ion-col>
-      <div class = "twobuttons">
-        <ion-button style = "--background:'#eb400cc9'" class = "fluxobutton" expand = "undefined" id="open-modal-saida">Nova Saída</ion-button>
+      <div class="twobuttons">
+        <ion-button style="--background:'#eb400cc9'" class="fluxobutton" expand="undefined" id="open-modal-saida">Nova
+          Saída</ion-button>
       </div>
     </ion-col>
 
-  <!-- Modal saida ----------------------------------------------------------------------------------------------->
-  <ion-modal trigger="open-modal-saida" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
+    <!-- Modal saida ----------------------------------------------------------------------------------------------->
+    <ion-modal trigger="open-modal-saida" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
 
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel(1)">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Welcome</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="confirmSaida(1)" [strong]="true">Confirm</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel(1)">Cancel</ion-button>
+            </ion-buttons>
+            <ion-title>Welcome</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirmSaida(1)" [strong]="true">Confirm</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
 
 
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="stacked">Data</ion-label>
-          <ion-input type="date" placeholder="Your name" [(ngModel)]="saida.data"></ion-input>
-        </ion-item>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <ion-label position="stacked">Data</ion-label>
+            <ion-input type="date" placeholder="Your name" [(ngModel)]="saida.data"></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="stacked">Valor</ion-label>
-          <ion-input type="number" placeholder="Your name" [(ngModel)]="saida.valor"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Valor</ion-label>
+            <ion-input type="number" placeholder="Your name" [(ngModel)]="saida.valor"></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="stacked">Detalhes</ion-label>
-          <ion-input type="text" placeholder="Your name" [(ngModel)]="saida.detalhes"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Detalhes</ion-label>
+            <ion-input type="text" placeholder="Your name" [(ngModel)]="saida.detalhes"></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="stacked">Titulo</ion-label>
-          <ion-input type="text" placeholder="Your name" [(ngModel)]="saida.titulo"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Titulo</ion-label>
+            <ion-input type="text" placeholder="Your name" [(ngModel)]="saida.titulo"></ion-input>
+          </ion-item>
 
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
 
-  
   </ion-row>
-    
 
-  <ion-row class="ion-justify-content-center" style ="padding-top: 20%;"  >
-    <div class = "onebutton">
-      <ion-button  expand = "block" (click) = "teste()">Fechar mês</ion-button>
+  <!-- Botão Fechar mês ----------------------------------------------------------------------------------------------->
+  <ion-row class="ion-justify-content-center" style="padding-top: 20%;">
+    <div class="onebutton">
+      <ion-button expand="block" (click)="teste()">Fechar mês</ion-button>
     </div>
   </ion-row>
-  
-  
+
+
 </ion-content>

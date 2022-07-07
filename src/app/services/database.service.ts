@@ -1,39 +1,59 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {  Firestore, collectionData, addDoc, doc, docData,updateDoc } from '@angular/fire/firestore';
+
+import { collection } from '@firebase/firestore';
+import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
+import { dataModel } from '../models/dataModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  dados: any[] = []
+  dados = new Array()
 
-  constructor(private fireStore: AngularFirestore) { }
+  constructor(private firestore: Firestore) { }
 
-  getteste() {
-    const docRef = this.fireStore.collection('teste')
 
-    docRef.get().subscribe((todos) => {
-      todos.forEach((data: any) => {
-          this.dados.push(data.data());
-      });
-      
-  });
-    return this.dados;
-}
+// Recuperando saldo ----------------------------------------------------------------------------------------------
+  getSaldo(): Observable<dataModel[]> {
 
-addEntrada(entrada:any) {
+    const saldoRef = doc(this.firestore, 'wallet/dados')
+    return docData(saldoRef, {idField: 'id'}) as Observable<dataModel[]>
+  }
 
-  const docRef =  this.fireStore.doc('teste/asasd')
-  const novodado = {
-      ...entrada,
-  };
+// Atualizando saldo ----------------------------------------------------------------------------------------------
+  updateSaldo(novoSaldo:number){
+    
+    const saldoRef = doc(this.firestore, 'wallet/dados')
+    return updateDoc(saldoRef, {saldo: novoSaldo}) 
+    
+  }
 
-  docRef.set(novodado, {
-      merge: true,
-  })
-  
-}
+// Recuperando extrato --------------------------------------------------------------------------------------------
+  getExtrato(): Observable<dataModel[]> {
+
+    const extratoRef = collection(this.firestore, 'teste')
+    return collectionData(extratoRef, {idField: 'id'}) as Observable<dataModel[]>
+  }
+
+// Adicionando entrada --------------------------------------------------------------------------------------------
+  addEntrada(entrada:any) {
+       
+    const docRef = collection(this.firestore, 'teste' )  
+    return addDoc(docRef, entrada)
+  }
+
+// Adicionando saida ----------------------------------------------------------------------------------------------
+  addSaida(saida:any) {
+    
+
+    const docRef = collection(this.firestore, 'teste' )  
+    return addDoc(docRef, saida)
+  }
+
 }
 
 

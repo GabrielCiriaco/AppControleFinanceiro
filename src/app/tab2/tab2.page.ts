@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,23 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+   extrato : any[] = []
+   saldo: any
+   
+   
+   
+  
 
+  constructor(private data: DatabaseService) {
+
+    this.data.getExtrato().subscribe(res=>{
+      console.log(res);
+      this.extrato = res
+      
+    })
+   }
+   
 }
+
+
+
