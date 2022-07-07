@@ -9,16 +9,20 @@ import { DatabaseService } from '../services/database.service';
 export class Tab2Page {
 
    extrato : any[] = []
+   saldo: any
+   
+   
    
   
 
-  constructor(private data: DatabaseService) { }
-  
+  constructor(private data: DatabaseService) {
 
-  async ionViewWillEnter(): Promise<void>{
-    this.extrato = []
-    this.extrato = await this.data.getExtrato()
-  }
+    this.data.getExtrato().subscribe(res=>{
+      console.log(res);
+      this.extrato = res
+      
+    })
+   }
    
 }
 

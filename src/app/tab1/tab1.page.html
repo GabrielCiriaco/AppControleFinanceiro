@@ -8,16 +8,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  
+
+
   <ion-row>
     <ion-col>
-      <div class= "detalhes">
+      <div class="detalhes">
         <h2>Mês: Junho</h2>
       </div>
     </ion-col>
   </ion-row>
-  
+
   <!--Card do Saldo Atual ------------------------------------------------------------------------------------------>
 
   <ion-card>
@@ -27,31 +27,31 @@
         <ion-col>
           <ion-card-title>Saldo atual:</ion-card-title>
         </ion-col>
-        
+
         <ion-col>
-          <ion-card-title style = "float:right;">28/07</ion-card-title>
+          <ion-card-title style="float:right;">28/07</ion-card-title>
         </ion-col>
       </ion-row>
     </ion-card-header>
-    
+
     <ion-row>
-      <ion-card-content *ngFor = "let saldo of saldo">{{saldo.saldo}}</ion-card-content>
+      <ion-card-content>R$ {{saldoExibido}}</ion-card-content>
       <ion-icon name="eye-outline"></ion-icon>
     </ion-row>
 
   </ion-card>
 
   <!-- Botão Entrada --------------------------------------------------------------------------------------------->
-  
+
   <ion-row class="ion-justify-content-center">
-    
-    <ion-col >
-      <div class = "twobuttons">
-        <ion-button class = "fluxobutton" expand = "undefined"  id="open-modal-entrada" >Nova Entrada</ion-button>
+
+    <ion-col>
+      <div class="twobuttons">
+        <ion-button class="fluxobutton" expand="undefined" id="open-modal-entrada">Nova Entrada</ion-button>
       </div>
     </ion-col>
 
-  <!-- Modal entrada ----------------------------------------------------------------------------------------------->
+    <!-- Modal entrada ----------------------------------------------------------------------------------------------->
     <ion-modal trigger="open-modal-entrada" (willDismiss)="onWillDismiss($event)">
       <ng-template>
 
@@ -88,14 +88,15 @@
       </ng-template>
     </ion-modal>
 
- <!-- Botão Saída ----------------------------------------------------------------------------------------------->
+    <!-- Botão Saída ----------------------------------------------------------------------------------------------->
     <ion-col>
-      <div class = "twobuttons">
-        <ion-button style = "--background:'#eb400cc9'" class = "fluxobutton" expand = "undefined" id="open-modal-saida">Nova Saída</ion-button>
+      <div class="twobuttons">
+        <ion-button style="--background:'#eb400cc9'" class="fluxobutton" expand="undefined" id="open-modal-saida">Nova
+          Saída</ion-button>
       </div>
     </ion-col>
 
-  <!-- Modal saida ----------------------------------------------------------------------------------------------->
+    <!-- Modal saida ----------------------------------------------------------------------------------------------->
     <ion-modal trigger="open-modal-saida" (willDismiss)="onWillDismiss($event)">
       <ng-template>
 
@@ -138,13 +139,13 @@
     </ion-modal>
 
   </ion-row>
-    
- <!-- Botão Fechar mês ----------------------------------------------------------------------------------------------->
-  <ion-row class="ion-justify-content-center" style ="padding-top: 20%;"  >
-    <div class = "onebutton">
-      <ion-button  expand = "block" (click) = "teste()">Fechar mês</ion-button>
+
+  <!-- Botão Fechar mês ----------------------------------------------------------------------------------------------->
+  <ion-row class="ion-justify-content-center" style="padding-top: 20%;">
+    <div class="onebutton">
+      <ion-button expand="block" (click)="teste()">Fechar mês</ion-button>
     </div>
   </ion-row>
-  
-  
+
+
 </ion-content>

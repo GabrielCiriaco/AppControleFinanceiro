@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {  Firestore, collectionData, addDoc, doc, docData,updateDoc } from '@angular/fire/firestore';
+
+import { collection } from '@firebase/firestore';
+import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { dataModel } from '../models/dataModel';
 
 @Injectable({
   providedIn: 'root'
@@ -9,64 +14,44 @@ export class DatabaseService {
 
   dados = new Array()
 
-  constructor(private fireStore: AngularFirestore) { }
+  constructor(private firestore: Firestore) { }
+
 
 // Recuperando saldo ----------------------------------------------------------------------------------------------
-  async getSaldo() {
-    let dados = [];
-    const docRef =  await this.fireStore.collection('wallet')
-    await docRef.get().subscribe( array =>{
-      array.forEach(item=>{
-        dados.push(item.data())
-      });
-    })
-    return dados;
+  getSaldo(): Observable<dataModel[]> {
+
+    const saldoRef = doc(this.firestore, 'wallet/dados')
+    return docData(saldoRef, {idField: 'id'}) as Observable<dataModel[]>
+  }
+
+// Atualizando saldo ----------------------------------------------------------------------------------------------
+  updateSaldo(novoSaldo:number){
+    
+    const saldoRef = doc(this.firestore, 'wallet/dados')
+    return updateDoc(saldoRef, {saldo: novoSaldo}) 
+    
   }
 
 // Recuperando extrato --------------------------------------------------------------------------------------------
-  async getExtrato() {
+  getExtrato(): Observable<dataModel[]> {
 
-    let dados = []
-    const docRef = this.fireStore.collection('teste')
-    
-    docRef.get().subscribe( array =>{
-      array.forEach(item=>{
-
-        dados.push(item.data());
-      });
-    })
-
-    return dados
+    const extratoRef = collection(this.firestore, 'teste')
+    return collectionData(extratoRef, {idField: 'id'}) as Observable<dataModel[]>
   }
 
 // Adicionando entrada --------------------------------------------------------------------------------------------
   addEntrada(entrada:any) {
-    
-    const uid = uuidv4();
-    entrada.uid =uid
-    const docRef =  this.fireStore.doc(`teste/${uid}`)
-    const novodado = {
-        ...entrada,
-    };
-
-    docRef.set(novodado, {
-      merge: true,
-    }) 
+       
+    const docRef = collection(this.firestore, 'teste' )  
+    return addDoc(docRef, entrada)
   }
 
 // Adicionando saida ----------------------------------------------------------------------------------------------
   addSaida(saida:any) {
     
-    const uid = uuidv4();
-    saida.uid =uid
-    const docRef =  this.fireStore.doc(`teste/${uid}`)
-    const novodado = {
-      ...saida,
-    };
 
-    docRef.set(novodado, {
-        merge: true,
-    }) 
+    const docRef = collection(this.firestore, 'teste' )  
+    return addDoc(docRef, saida)
   }
 
 }

@@ -1,8 +1,7 @@
-export class SaidaModel {
+export class dataClass {
     data: Date = new Date;
     detalhes: string;
-    uid: string;
-    tipo: string = 'saida'
+    tipo: string;
     titulo: string;
     valor: number;
 }
