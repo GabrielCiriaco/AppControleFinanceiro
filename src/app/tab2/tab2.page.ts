@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,19 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+   extrato : any[] = []
+   
+  
 
+  constructor(private data: DatabaseService) { }
+  
+
+  async ionViewWillEnter(): Promise<void>{
+    this.extrato = []
+    this.extrato = await this.data.getExtrato()
+  }
+   
 }
+
+
+

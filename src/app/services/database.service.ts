@@ -1,39 +1,74 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  dados: any[] = []
+  dados = new Array()
 
   constructor(private fireStore: AngularFirestore) { }
 
-  getteste() {
-    const docRef = this.fireStore.collection('teste')
-
-    docRef.get().subscribe((todos) => {
-      todos.forEach((data: any) => {
-          this.dados.push(data.data());
+// Recuperando saldo ----------------------------------------------------------------------------------------------
+  async getSaldo() {
+    let dados = [];
+    const docRef =  await this.fireStore.collection('wallet')
+    await docRef.get().subscribe( array =>{
+      array.forEach(item=>{
+        dados.push(item.data())
       });
-      
-  });
-    return this.dados;
-}
+    })
+    return dados;
+  }
 
-addEntrada(entrada:any) {
+// Recuperando extrato --------------------------------------------------------------------------------------------
+  async getExtrato() {
 
-  const docRef =  this.fireStore.doc('teste/asasd')
-  const novodado = {
-      ...entrada,
-  };
+    let dados = []
+    const docRef = this.fireStore.collection('teste')
+    
+    docRef.get().subscribe( array =>{
+      array.forEach(item=>{
 
-  docRef.set(novodado, {
+        dados.push(item.data());
+      });
+    })
+
+    return dados
+  }
+
+// Adicionando entrada --------------------------------------------------------------------------------------------
+  addEntrada(entrada:any) {
+    
+    const uid = uuidv4();
+    entrada.uid =uid
+    const docRef =  this.fireStore.doc(`teste/${uid}`)
+    const novodado = {
+        ...entrada,
+    };
+
+    docRef.set(novodado, {
       merge: true,
-  })
-  
-}
+    }) 
+  }
+
+// Adicionando saida ----------------------------------------------------------------------------------------------
+  addSaida(saida:any) {
+    
+    const uid = uuidv4();
+    saida.uid =uid
+    const docRef =  this.fireStore.doc(`teste/${uid}`)
+    const novodado = {
+      ...saida,
+    };
+
+    docRef.set(novodado, {
+        merge: true,
+    }) 
+  }
+
 }
 
 
