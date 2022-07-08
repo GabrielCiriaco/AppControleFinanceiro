@@ -4,6 +4,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { provideFirestore,getFirestore} from '@angular/fire/firestore';
+import { NgChartsModule} from 'ng2-charts'
+
 
 
 import { environment } from 'src/environments/environment';
@@ -22,6 +24,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    NgChartsModule
   ],
 
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

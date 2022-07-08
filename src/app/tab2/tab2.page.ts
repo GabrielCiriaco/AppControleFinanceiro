@@ -24,6 +24,13 @@ export class Tab2Page {
     })
    }
    
+   converteData(data:any){
+
+    let novaData = `${data.split('-')[2]} / ${data.split('-')[1]}`
+    console.log('aquiii',novaData);
+    return novaData
+
+   }
 }
 
 

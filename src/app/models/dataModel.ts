@@ -1,5 +1,5 @@
 export interface dataModel {
-    data: Date;
+    data: string;
     detalhes: string;
     tipo: string;
     titulo: string;
