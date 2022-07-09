@@ -1,5 +1,5 @@
 export class dataClass {
-    data: Date = new Date;
+    data: string;
     detalhes: string;
     tipo: string;
     titulo: string;

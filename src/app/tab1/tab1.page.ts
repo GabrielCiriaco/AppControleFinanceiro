@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DatabaseService } from '../services/database.service';
 import { IonModal } from '@ionic/angular';
 
@@ -19,25 +19,38 @@ export class Tab1Page {
   saida: dataClass
   saldo: any
   saldoExibido: number = 0
-  
+  titulos_entrada = new Array()
+  titulos_saida = new Array()
+  valor_entrada = new Array()
+  valor_saida = new Array()
+  blur:string = 'desfocado'
+
+  @ViewChild('Icone') icon: any
   
   constructor( public data: DatabaseService) {
     this.entrada = new dataClass();
     this.saida = new dataClass();
+
+   
+    
     
     this.data.getSaldo().subscribe(res =>{ 
       console.log(res)
       this.saldo = {...res}
       this.saldoExibido = this.saldo.saldo
     })
+
+    this.data.getTitulos().subscribe(res=>{
+      this.titulos_entrada = res.entrada
+      this.titulos_saida = res.saida
+      this.valor_entrada = res.valor_entrada
+      this.valor_saida = res.valor_saida
+    })
+
   }
 
 // Setando Parametros ao abrir página -----------------------------------------------------------------------------
   async ionViewWillEnter(): Promise<void>{
-    
-    
-
-    
     
   }
 
@@ -50,7 +63,7 @@ export class Tab1Page {
 // Confirmação de movimentação entrada ---------------------------------------------------------------------------
   confirmEntrada(modal:number) {
     
-    this.entrada.data = new Date(parseInt(`${this.entrada.data}`.split('-')[0]),parseInt(`${this.entrada.data}`.split('-')[1]),parseInt(`${this.entrada.data}`.split('-')[2]),new Date().getHours(),new Date().getMinutes(),new Date().getSeconds())
+    this.entrada.data = `${this.entrada.data}` 
     this.modalList.toArray()[modal].dismiss(this.entrada, 'confirm-entrada');
     console.log(this.entrada);
     
@@ -58,7 +71,7 @@ export class Tab1Page {
 
 // Confirmação de movimentação saida ------------------------------------------------------------------------------
   confirmSaida(modal:number) {
-    this.saida.data = new Date(parseInt(`${this.saida.data}`.split('-')[0]),parseInt(`${this.saida.data}`.split('-')[1]),parseInt(`${this.saida.data}`.split('-')[2]),new Date().getHours(),new Date().getMinutes(),new Date().getSeconds())
+    this.saida.data = `${this.saida.data}`
     this.modalList.toArray()[modal].dismiss(this.saida, 'confirm-saida');
     
   }
@@ -70,27 +83,54 @@ export class Tab1Page {
 
     if (ev.detail.role === 'confirm-entrada') {
       this.entrada.tipo = 'entrada'
-      let novoSaldo = this.saldoExibido + this.entrada.valor
-      this.data.updateSaldo(novoSaldo)
+      let novoSaldo = this.saldoExibido*100 + this.entrada.valor*100
+      this.data.updateSaldo(novoSaldo/100)
+
       console.log('soma:', novoSaldo);
-      
       this.data.addEntrada({...this.entrada})
+
     }
 
     if (ev.detail.role === 'confirm-saida') {
       this.saida.tipo = 'saida'
-      let novoSaldo = this.saldoExibido - this.saida.valor
-      this.data.updateSaldo(novoSaldo)
-      console.log('soma:', novoSaldo);
+      let novoSaldo = this.saldoExibido*100 - this.saida.valor*100
+      this.data.updateSaldo(novoSaldo/100);
       this.data.addSaida({...this.saida})
-    }
 
+      this.titulos_saida.forEach((item, index)=>{
+        if( this.saida.titulo === item){
+          this.valor_saida[index] += this.saida.valor
+          console.log(this.valor_saida[index]);
+          this.data.updateTitulo({ ...{entrada: this.titulos_entrada}, ...{saida: this.titulos_saida}, ...{valor_entrada: this.valor_entrada}, ...{valor_saida: this.valor_saida}})
+        }
+      
+    })
+    
+    }
+    
     this.entrada = new dataClass();
     this.saida = new dataClass();
 
+  
+
+  }
+  
+// Ao fechar o Modal ---------------------------------------------------------------------------------------------
+  changeFocus(){
+    if(this.blur =='focado'){
+      this.blur = 'desfocado'
+      
+      this.icon.name = 'eye-off-outline'
+      console.log(this.icon.name);
+      
+     
+    }
+    else{
+      this.blur = 'focado'
+      this.icon.name = 'eye-outline'
+    }
+      
   }
 
 
-  teste(){
-  }
 }

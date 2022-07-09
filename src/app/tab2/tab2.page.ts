@@ -10,6 +10,7 @@ export class Tab2Page {
 
    extrato : any[] = []
    saldo: any
+   teste: any = 1
    
    
    
@@ -24,6 +25,13 @@ export class Tab2Page {
     })
    }
    
+   converteData(data:any){
+
+    let novaData = `${data.split('-')[2]} / ${data.split('-')[1]}`
+    console.log('aquiii',novaData);
+    return novaData
+
+   }
 }
 
 

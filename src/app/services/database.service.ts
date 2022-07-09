@@ -48,10 +48,25 @@ export class DatabaseService {
 
 // Adicionando saida ----------------------------------------------------------------------------------------------
   addSaida(saida:any) {
-    
 
     const docRef = collection(this.firestore, 'teste' )  
     return addDoc(docRef, saida)
+  }
+
+// Recuperando saldo ----------------------------------------------------------------------------------------------
+  getTitulos() {
+
+    const saldoRef = doc(this.firestore, 'wallet/titulos')
+    return docData(saldoRef) 
+  }
+
+  updateTitulo(dados){
+    
+    const saldoRef = doc(this.firestore, 'wallet/titulos')
+    console.log(dados);
+    
+    return updateDoc(saldoRef, dados) 
+    
   }
 
 }
