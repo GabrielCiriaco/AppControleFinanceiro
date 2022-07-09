@@ -10,6 +10,7 @@ export class Tab2Page {
 
    extrato : any[] = []
    saldo: any
+   teste: any = 1
    
    
    

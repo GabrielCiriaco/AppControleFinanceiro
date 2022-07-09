@@ -13,7 +13,7 @@
   <ion-row>
     <ion-col>
       <div class="detalhes">
-        <h2>Mês: Junho</h2>
+        <h2 class="teste">Casher</h2>
       </div>
     </ion-col>
   </ion-row>
@@ -21,24 +21,14 @@
   <!--Card do Saldo Atual ------------------------------------------------------------------------------------------>
 
   <ion-card>
-
-    <ion-card-header>
+    <ion-card-content>
       <ion-row>
-        <ion-col>
-          <ion-card-title>Saldo atual:</ion-card-title>
-        </ion-col>
-
-        <ion-col>
-          <ion-card-title style="float:right;">28/07</ion-card-title>
-        </ion-col>
+        <div [ngClass]="{blur0: blur == 'focado', blur1: blur == 'desfocado'}">
+          <h2 style="font-size: 200%; font-family: 'Nunito', sans-serif;">R$ {{saldoExibido}}</h2>
+        </div>
+        <ion-icon name="eye-off-outline" #Icone (click)=changeFocus()></ion-icon>
       </ion-row>
-    </ion-card-header>
-
-    <ion-row>
-      <ion-card-content>R$ {{saldoExibido}}</ion-card-content>
-      <ion-icon name="eye-outline"></ion-icon>
-    </ion-row>
-
+    </ion-card-content>
   </ion-card>
 
   <!-- Botão Entrada --------------------------------------------------------------------------------------------->
@@ -57,13 +47,13 @@
 
         <ion-header>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="cancel(0)">Cancel</ion-button>
+            <ion-buttons slot="start" style="position: absolute">
+              <ion-button (click)="cancel(0)">
+                <ion-icon name="return-up-back-outline"></ion-icon>
+              </ion-button>
             </ion-buttons>
             <ion-title>Entrada</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="confirmEntrada(0)" [strong]="true">Confirm</ion-button>
-            </ion-buttons>
+
           </ion-toolbar>
         </ion-header>
 
@@ -87,12 +77,16 @@
           <ion-list>
             <ion-item>
               <ion-label position="stacked">Titulo</ion-label>
-              <ion-select interface="popover" placeholder="Select fruit" [(ngModel)]="entrada.titulo">
+              <ion-select interface="popover" placeholder="Escolha os Titulos" [(ngModel)]="entrada.titulo">
                 <ion-select-option *ngFor="let titulo of titulos_entrada" value="{{titulo}}">{{titulo}}
                 </ion-select-option>
               </ion-select>
             </ion-item>
           </ion-list>
+
+
+          <ion-button (click)="confirmEntrada(0)" [strong]="true">Confirm</ion-button>
+
 
         </ion-content>
       </ng-template>
@@ -112,13 +106,13 @@
 
         <ion-header>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="cancel(1)">Cancel</ion-button>
+            <ion-buttons slot="start" style="position: absolute">
+              <ion-button (click)="cancel(1)">
+                <ion-icon name="return-up-back-outline"></ion-icon>
+              </ion-button>
             </ion-buttons>
             <ion-title>Welcome</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="confirmSaida(1)" [strong]="true">Confirm</ion-button>
-            </ion-buttons>
+
           </ion-toolbar>
         </ion-header>
 
@@ -126,28 +120,32 @@
         <ion-content class="ion-padding">
           <ion-item>
             <ion-label position="stacked">Data</ion-label>
-            <ion-input type="date" placeholder="Your name" [(ngModel)]="saida.data"></ion-input>
+            <ion-input class="input" type="date" placeholder="Data" [(ngModel)]="saida.data"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Valor</ion-label>
-            <ion-input type="number" placeholder="Your name" [(ngModel)]="saida.valor"></ion-input>
+            <ion-input type="number" placeholder="Digite o Valor" [(ngModel)]="saida.valor"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Detalhes</ion-label>
-            <ion-input type="text" placeholder="Your name" [(ngModel)]="saida.detalhes"></ion-input>
+            <ion-input type="text" placeholder="Digite os Detalhes" [(ngModel)]="saida.detalhes"></ion-input>
           </ion-item>
 
           <ion-list>
             <ion-item>
               <ion-label position="stacked">Titulo</ion-label>
-              <ion-select interface="popover" placeholder="Select fruit" [(ngModel)]="saida.titulo">
+              <ion-select interface="popover" placeholder="Escolha o Titulo" [(ngModel)]="saida.titulo">
                 <ion-select-option *ngFor="let titulo of titulos_saida" value="{{titulo}}">{{titulo}}
                 </ion-select-option>
               </ion-select>
             </ion-item>
           </ion-list>
+
+
+          <ion-button (click)="confirmSaida(1)" [strong]="true">Confirm</ion-button>
+
 
         </ion-content>
       </ng-template>

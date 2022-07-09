@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DatabaseService } from '../services/database.service';
 import { IonModal } from '@ionic/angular';
 
@@ -23,11 +23,16 @@ export class Tab1Page {
   titulos_saida = new Array()
   valor_entrada = new Array()
   valor_saida = new Array()
-  
+  blur:string = 'desfocado'
+
+  @ViewChild('Icone') icon: any
   
   constructor( public data: DatabaseService) {
     this.entrada = new dataClass();
     this.saida = new dataClass();
+
+   
+    
     
     this.data.getSaldo().subscribe(res =>{ 
       console.log(res)
@@ -110,4 +115,22 @@ export class Tab1Page {
 
   }
   
+// Ao fechar o Modal ---------------------------------------------------------------------------------------------
+  changeFocus(){
+    if(this.blur =='focado'){
+      this.blur = 'desfocado'
+      
+      this.icon.name = 'eye-off-outline'
+      console.log(this.icon.name);
+      
+     
+    }
+    else{
+      this.blur = 'focado'
+      this.icon.name = 'eye-outline'
+    }
+      
+  }
+
+
 }
