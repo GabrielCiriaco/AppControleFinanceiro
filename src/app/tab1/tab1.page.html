@@ -13,15 +13,25 @@
   <ion-row>
     <ion-col>
       <div class="detalhes">
-        <h2 class="teste">Casher</h2>
+        <h2 class="marca">Casher</h2>
       </div>
     </ion-col>
   </ion-row>
+
 
   <!--Card do Saldo Atual ------------------------------------------------------------------------------------------>
 
   <ion-card>
     <ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <div>
+            <h2 style="font-size: 20px; color: white;">Saldo Atual:</h2>
+          </div>
+        </ion-col>
+      </ion-row>
+
       <ion-row>
         <div [ngClass]="{blur0: blur == 'focado', blur1: blur == 'desfocado'}">
           <h2 style="font-size: 200%; font-family: 'Nunito', sans-serif;">R$ {{saldoExibido}}</h2>
@@ -31,13 +41,26 @@
     </ion-card-content>
   </ion-card>
 
+
+  <div class="linha"></div>
+
+  <ion-row>
+    <ion-col>
+      <div style="padding-left: 5%;">
+        <h2 style="font-size: 20px; color: white;">Nova Movimentação: </h2>
+      </div>
+    </ion-col>
+  </ion-row>
+
+
+
   <!-- Botão Entrada --------------------------------------------------------------------------------------------->
 
   <ion-row class="ion-justify-content-center">
 
     <ion-col>
       <div class="twobuttons">
-        <ion-button class="fluxobutton" expand="undefined" id="open-modal-entrada">Nova Entrada</ion-button>
+        <ion-button class="fluxobutton" expand="undefined" id="open-modal-entrada">Entrada</ion-button>
       </div>
     </ion-col>
 
@@ -52,7 +75,7 @@
                 <ion-icon name="return-up-back-outline"></ion-icon>
               </ion-button>
             </ion-buttons>
-            <ion-title>Entrada</ion-title>
+            <ion-title> Nova entrada</ion-title>
 
           </ion-toolbar>
         </ion-header>
@@ -95,8 +118,8 @@
     <!-- Botão Saída ----------------------------------------------------------------------------------------------->
     <ion-col>
       <div class="twobuttons">
-        <ion-button style="--background:'#eb400cc9'" class="fluxobutton" expand="undefined" id="open-modal-saida">Nova
-          Saída</ion-button>
+        <ion-button style="--background:'#eb400cc9'" class="fluxobutton" expand="undefined" id="open-modal-saida">Saída
+        </ion-button>
       </div>
     </ion-col>
 
@@ -111,7 +134,7 @@
                 <ion-icon name="return-up-back-outline"></ion-icon>
               </ion-button>
             </ion-buttons>
-            <ion-title>Welcome</ion-title>
+            <ion-title> Nova saída</ion-title>
 
           </ion-toolbar>
         </ion-header>
