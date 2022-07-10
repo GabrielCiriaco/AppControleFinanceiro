@@ -56,13 +56,17 @@ ion-icon {
 
 ion-title{
     text-align: center;
+    font-size: 25px;
+    font-weight: bold;
 }
+
 
 ion-button{
     padding: 0px;
     width: 100%;  
-        --color: #122221;
+    --color: #122221;
     --background: #52ee22c9;
+    font-weight: bold ;
 }
 
 .detalhes{

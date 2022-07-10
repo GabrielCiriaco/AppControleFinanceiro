@@ -19,19 +19,32 @@ export class Tab2Page {
   constructor(private data: DatabaseService) {
 
     this.data.getExtrato().subscribe(res=>{
-      console.log(res);
+      
       this.extrato = res
+      this.extrato.sort((a,b)=>{
+
+        return new Date(b.data).getTime() - new Date(a.data).getTime()
+      });
+      
+
       
     })
+
+    
+    
+    
    }
    
    converteData(data:any){
 
     let novaData = `${data.split('-')[2]} / ${data.split('-')[1]}`
-    console.log('aquiii',novaData);
+    
     return novaData
 
    }
+
+     
+
 }
 
 

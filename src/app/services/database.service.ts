@@ -69,6 +69,15 @@ export class DatabaseService {
     
   }
 
+  updateSaidaTota(dados){
+    
+    const saldoRef = doc(this.firestore, 'wallet/titulos')
+    console.log(dados);
+    
+    return updateDoc(saldoRef, dados) 
+    
+  }
+
 }
 
 

@@ -23,6 +23,7 @@ export class Tab1Page {
   titulos_saida = new Array()
   valor_entrada = new Array()
   valor_saida = new Array()
+  saida_total:any
   blur:string = 'desfocado'
 
   @ViewChild('Icone') icon: any
@@ -45,6 +46,8 @@ export class Tab1Page {
       this.titulos_saida = res.saida
       this.valor_entrada = res.valor_entrada
       this.valor_saida = res.valor_saida
+      this.saida_total = res.saida_total
+      
     })
 
   }
@@ -95,13 +98,16 @@ export class Tab1Page {
       this.saida.tipo = 'saida'
       let novoSaldo = this.saldoExibido*100 - this.saida.valor*100
       this.data.updateSaldo(novoSaldo/100);
+      this.saida_total -= this.saida.valor 
+      this.data.updateSaidaTota({ ...{entrada: this.titulos_entrada}, ...{saida: this.titulos_saida}, ...{saida_total:this.saida_total},...{valor_entrada: this.valor_entrada}, ...{valor_saida: this.valor_saida}})
+       
       this.data.addSaida({...this.saida})
 
       this.titulos_saida.forEach((item, index)=>{
         if( this.saida.titulo === item){
           this.valor_saida[index] += this.saida.valor
           console.log(this.valor_saida[index]);
-          this.data.updateTitulo({ ...{entrada: this.titulos_entrada}, ...{saida: this.titulos_saida}, ...{valor_entrada: this.valor_entrada}, ...{valor_saida: this.valor_saida}})
+          this.data.updateTitulo({ ...{entrada: this.titulos_entrada}, ...{saida: this.titulos_saida}, ...{saida_total:this.saida_total},...{valor_entrada: this.valor_entrada}, ...{valor_saida: this.valor_saida}})
         }
       
     })
