@@ -43,8 +43,11 @@ export class Tab3Page {
       this.valor_entrada = res.valor_entrada
       this.valor_saida = res.valor_saida
     })
-    this.myChart.destroy()
-    this.generateGraph()
+    if(this.myChart){
+      this.myChart.destroy()
+      this.generateGraph()
+    
+    }
     this.valor_saida.forEach((item)=>{
       this.valor_porcento.push((item/this.saida_total*-100).toFixed(2))
     })
@@ -72,7 +75,7 @@ export class Tab3Page {
   generateGraph(){
     
     this.myChart = new Chart(this.canvas, {
-      type: 'pie',
+      type: 'doughnut',
       data: {
           labels: this.titulos_saida,
           datasets: [{
