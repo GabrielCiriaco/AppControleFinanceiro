@@ -31,9 +31,6 @@ export class Tab1Page {
   constructor( public data: DatabaseService) {
     this.entrada = new dataClass();
     this.saida = new dataClass();
-
-   
-    
     
     this.data.getSaldo().subscribe(res =>{ 
       console.log(res)
@@ -108,8 +105,9 @@ export class Tab1Page {
           this.valor_saida[index] += this.saida.valor
           console.log(this.valor_saida[index]);
           this.data.updateTitulo({ ...{entrada: this.titulos_entrada}, ...{saida: this.titulos_saida}, ...{saida_total:this.saida_total},...{valor_entrada: this.valor_entrada}, ...{valor_saida: this.valor_saida}})
+          return
         }
-      
+        
     })
     
     }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {  Firestore, collectionData, addDoc, doc, docData,updateDoc } from '@angular/fire/firestore';
+import {  Firestore, collectionData, addDoc, doc, docData,updateDoc,deleteDoc } from '@angular/fire/firestore';
 
 import { collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
@@ -75,6 +75,17 @@ export class DatabaseService {
     console.log(dados);
     
     return updateDoc(saldoRef, dados) 
+    
+  }
+
+  deleteMovimento(dados){
+    
+    console.log(dados);
+    
+    const deleteRef = doc(this.firestore, `teste/${dados.id}`)
+    console.log(dados);
+    
+    return deleteDoc(deleteRef) 
     
   }
 
